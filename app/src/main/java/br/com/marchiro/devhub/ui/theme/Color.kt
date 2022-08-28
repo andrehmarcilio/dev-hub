@@ -2,7 +2,8 @@ package br.com.marchiro.devhub.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+val Black = Color(0xFF000000)
+val GitGrayDarker = Color(0xFF1F2329)
+val GitBlueDarker = Color(0xFF223D5C)
+val GitBlue = Color(0xFF58A6FF)
+val GitGray = Color(0xFF2D333B)
