@@ -13,3 +13,12 @@ No primeiro dia do desafio criei minha primeira tela com o Jetpack Compose.
 No segundo dia realizamos algumas alterações no Layout para deixá-lo mais agradável. Para desenvolver esta tela utilizei os seguintes elementos de Layout: 'Box', 'Column', 'Image' e o 'Text'.
 
 <img src="https://user-images.githubusercontent.com/103319187/187100276-c20bf1b6-f724-48ca-b103-ab498cf6c1b2.jpg" alt="Screenshot_20220828-090148_DevHub.jpg" width="230"/>
+
+
+## Dia 3 - Carregando a imagem a partir de uma url com o Coil
+
+No terceiro dia alteramos a forma de carregar a imagem de perfil. Antes ela era carregada por meio de um arquivo local - localizado no Drawable. Agora, ela é carregada a partir de uma url. Para isso, foi utilizada a biblioteca 'coil'.
+
+Link da biblioteca:
+
+https://github.com/coil-kt/coil 
