@@ -7,4 +7,5 @@
     <color name="git_gray">#FF2D333B</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="git_gray_lighter">#FF60666F</color>
 </resources>
