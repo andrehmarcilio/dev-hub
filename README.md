@@ -22,3 +22,18 @@ No terceiro dia alteramos a forma de carregar a imagem de perfil. Antes ela era 
 Link da biblioteca:
 
 https://github.com/coil-kt/coil 
+
+## Dia 4 - Retrofit
+
+Neste dia, adicionamos o Retrofit no projeto para realizar uma comunicação com a API do Github. Para adicionar o Retrofit foram realizados os seguintes passos:
+
+- Configuração Inicial do Retrofit /data/remote
+- Criação de uma Interface para realizar a comunicação com a Web Api /data/remote
+- Criação de uma interface do repository  (Para ser utilizada nos UseCases) /domain
+- Criação do Repository (Que implementa o repository do domain) /data/repository
+- Criação dos UseCases /domain 
+- Elaboração dos Estados da Main Activity /ui/states
+- Criação da View Model da Main Activity (Para gerenciar o estado de maneira eficiente) /ui/viewmodel
+- Implementação do Koin para realizar a 'injeção de dependência' /di
+
+![20220830_173430.gif](https://user-images.githubusercontent.com/103319187/187547857-f179ca34-70a4-4ed7-82b5-8b101a0af5bd.gif)
