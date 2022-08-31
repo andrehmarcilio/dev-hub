@@ -1,18 +1,25 @@
-package br.com.marchiro.devhub
+package br.com.marchiro.devhub.ui.activity
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -20,65 +27,84 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.lifecycleScope
+import br.com.marchiro.devhub.R
 import br.com.marchiro.devhub.data.remote.dto.GitHubProfileDTO
 import br.com.marchiro.devhub.ui.states.State
 import br.com.marchiro.devhub.ui.theme.DevHubTheme
 import br.com.marchiro.devhub.ui.theme.GitGray
-import br.com.marchiro.devhub.ui.viewmodel.MainActivityViewModel
+import br.com.marchiro.devhub.ui.viewmodel.UserInfoViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.size.Scale
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.compose.getViewModel
 
 
-class MainActivity : ComponentActivity() {
-    private val mainActivityViewModel: MainActivityViewModel by viewModel()
+class UserInfoActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setViewElements()
     }
 
     private fun setViewElements() {
-        lifecycleScope.launch {
-            mainActivityViewModel.getUser()
-            mainActivityViewModel.userStateFlow.collect {
-                setContent {
-                    DevHubTheme {
-                        Surface(
-                            modifier = Modifier.fillMaxSize(),
-                            color = MaterialTheme.colors.background
-                        ) {
-                            when (it) {
-                                is State.InitialState, is State.LoadingState -> {
-                                    LoadingScreen()
-                                }
-                                is State.ErrorState -> {
-                                    showError()
-                                }
-                                is State.DataState -> {
-                                    ProfileScreen(it.data)
-                                }
-                            }
-                        }
+        setContent {
+            DevHubTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    ProfileScreen()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ProfileScreen(viewModel: UserInfoViewModel = getViewModel()) {
+    val findData by viewModel.userStateFlow.collectAsState()
+    findData.let {
+        when (it) {
+            is State.InitialState, is State.LoadingState -> {
+                LoadingScreen()
+            }
+            is State.ErrorState -> {
+                showError(LocalContext.current)
+                errorScreen()
+            }
+            is State.DataState -> {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    val boxHeight = remember {
+                        250.dp
                     }
+                    ProfileHeader(boxHeight, it.data?.img)
+                    Spacer(Modifier.height(10.dp))
+                    ProfileInfo(it.data)
+                    Spacer(Modifier.height(10.dp))
                 }
             }
         }
     }
 
+}
 
+@Preview
+@Composable
+fun errorScreen() {
+    val context = LocalContext.current
+    Box(contentAlignment = Alignment.Center) {
+        Button(onClick = {
+            context.findActivity().finish()
+        },
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .background(color = GitGray)) {
+            Text(text = "Voltar", color = Color.White)
+        }
 
-
-    private fun showError() {
-        Toast.makeText(
-            this@MainActivity,
-            "Ocorreu algum erro",
-            Toast.LENGTH_LONG
-        ).show()
     }
 }
+
 
 @Preview
 @Composable
@@ -89,26 +115,6 @@ fun LoadingScreen() {
                 .height(50.dp)
                 .width(50.dp)
         )
-    }
-}
-
-@Preview
-@Composable
-fun ProfileScreen(
-    data: GitHubProfileDTO? = GitHubProfileDTO(
-        "Name",
-        "https://avatars.githubusercontent.com/u/103319187?v=4",
-        "login", "Bio"
-    )
-) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val boxHeight = remember {
-            250.dp
-        }
-        ProfileHeader(boxHeight, data?.img)
-        Spacer(Modifier.height(10.dp))
-        ProfileInfo(data)
-        Spacer(Modifier.height(10.dp))
     }
 }
 
@@ -158,4 +164,20 @@ private fun ProfileHeader(boxHeight: Dp, img: String?) {
     }
 }
 
+fun showError(context: Context) {
+    Toast.makeText(
+        context,
+        "Ocorreu algum erro",
+        Toast.LENGTH_LONG
+    ).show()
+}
 
+
+fun Context.findActivity(): Activity {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is Activity) return context
+        context = context.baseContext
+    }
+    throw IllegalStateException("no activity")
+}

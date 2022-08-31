@@ -37,3 +37,11 @@ Neste dia, adicionamos o Retrofit no projeto para realizar uma comunicação com
 - Implementação do Koin para realizar a 'injeção de dependência' /di
 
 ![20220830_173430.gif](https://user-images.githubusercontent.com/103319187/187547857-f179ca34-70a4-4ed7-82b5-8b101a0af5bd.gif)
+
+## Dia 5 - Alguns extras
+
+Sem querer acabei implementando a tarefa do quinto dia no quarto ;) 
+Então tirei o quinto dia para fazer algumas melhorias no código e adicionar a tela de formulário. Dessa forma podemos buscar um usuário especifico do GitHub.
+Também criei uma tela de erro - de forma bem simples.
+
+![20220831_162605.gif](https://user-images.githubusercontent.com/103319187/187775451-e03ae81a-9af6-40a5-b94b-7f15a241722c.gif)
