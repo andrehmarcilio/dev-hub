@@ -1,4 +1,5 @@
 # dev-hub
+
 Projeto desenvolvido durante o 7DaysOfCode - Android - Alura
 
 ## Dia 1 - Primeiros passos com o Jetpack Compose 
@@ -50,3 +51,11 @@ Também criei uma tela de erro - de forma bem simples.
 ## Dia 6 - Refatorando
 
 Hoje foi dia de realizar algumas melhoras no código. Para começar, separamos os elementos Composables da Activity, assim a mantendo mais 'clean'. Também realizei algumas modificação na maneira como controlo o estado da ui, agora essa responsabilidade ficou por completo na ViewModel.
+
+
+## Dia 7 - Exibição dos repositórios
+
+No último dia do desafio foi requisitado que implementássemos uma Feature para visualizar não somente as informações básicas do usuário como também os seus repositórios. Para isso tivemos que elaborar mais uma requisição com o Retrofit para buscar os repositórios. O resultado ficou assim: 
+
+![20220902_155425.gif](https://user-images.githubusercontent.com/103319187/188227141-920d1c4d-a742-4f6a-8ace-4a44e920495e.gif) 
+

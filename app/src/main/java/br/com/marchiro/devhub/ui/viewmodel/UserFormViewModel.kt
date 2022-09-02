@@ -1,9 +1,15 @@
 package br.com.marchiro.devhub.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import br.com.marchiro.devhub.domain.usecases.GetUserInfoUseCase
+import br.com.marchiro.devhub.domain.usecases.SearchUserInfoUseCase
+import br.com.marchiro.devhub.domain.usecases.SearchUserRepoUseCase
 
-class UserFormViewModel(private val getUserInfoUseCase: GetUserInfoUseCase) : ViewModel() {
+class UserFormViewModel(
+    private val searchUserInfoUseCase: SearchUserInfoUseCase,
+    private val searchUserRepoUseCase: SearchUserRepoUseCase) : ViewModel() {
 
-    fun getUserInfo(user: String) = getUserInfoUseCase(user)
+    fun searchUserInfo(user: String) = searchUserInfoUseCase(user)
+
+    fun searchUserRepo(user: String) = searchUserRepoUseCase(user)
+
 }

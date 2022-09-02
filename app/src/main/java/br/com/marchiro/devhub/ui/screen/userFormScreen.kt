@@ -47,7 +47,8 @@ fun formView(userFormViewModel: UserFormViewModel = getViewModel()) {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    userFormViewModel.getUserInfo(text.value)
+                    userFormViewModel.searchUserInfo(text.value)
+                    userFormViewModel.searchUserRepo(text.value)
                     Intent(context, UserInfoActivity::class.java).let {
                         context.startActivity(it)
                     }
