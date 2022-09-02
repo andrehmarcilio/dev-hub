@@ -45,3 +45,8 @@ Então tirei o quinto dia para fazer algumas melhorias no código e adicionar a 
 Também criei uma tela de erro - de forma bem simples.
 
 ![20220831_162605.gif](https://user-images.githubusercontent.com/103319187/187775451-e03ae81a-9af6-40a5-b94b-7f15a241722c.gif)
+
+
+## Dia 6 - Refatorando
+
+Hoje foi dia de realizar algumas melhoras no código. Para começar, separamos os elementos Composables da Activity, assim a mantendo mais 'clean'. Também realizei algumas modificação na maneira como controlo o estado da ui, agora essa responsabilidade ficou por completo na ViewModel.
